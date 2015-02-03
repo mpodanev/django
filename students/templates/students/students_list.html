@@ -1,3 +1,5 @@
+{% load static from staticfiles %}
+
 <!DOCTYPE html>
 <html lang="uk">
 	
@@ -11,7 +13,7 @@
 		<link rel="stylesheet"
 			href="https://cdn.jsdelivr.net/bootstrap/3.3.0/css/bootstrap.min.css">
 
-		<link rel="stylesheet" href="./css/main.css">
+		<link rel="stylesheet" href="{% static "css/main.css" %}">
 		<!-- <style type="text/css">.col-xs-12, .col-xs-4, .col-xs-8 {border:3px solid red;}</style> -->
 
 
@@ -85,12 +87,13 @@
 				    </tr>
 				  </thead>
 				  <tbody>
+				    {% for student in students %}
 				  	<tr>
-				  		<td>1</td>
-				  		<td><img height="40" weidth="40" src="./img/Michel.JPG" class="img-rounded"></td>
-				  		<td> <a title="Редагувати" href="{% url "students_edit" 1 %}">Поданєв</a> </td>
-				  		<td> <a title="Редагувати" href="{% url "students_edit" 1 %}">Михайло</a></td>
-				  		<td>2123</td>
+				  		<td>{{ forloop.counter }}</td>
+				  		<td><img height="40" weidth="40" src="{% static student.image %}" class="img-rounded"></td>
+				  		<td> <a href="{% url "students_edit" student.id %}">{{ student.last_name }}</a> </td>
+				  		<td> <a href="{% url "students_edit" student.id %}">{{ student.first_name }}</a></td>
+				  		<td>{{ student.ticket}}</td>
 				  		<!-- Viev -->
 				  		<td>
 				  			<div class="dropdown">
@@ -100,106 +103,21 @@
 							<ul class="dropdown-menu" role="menu">
 							<li role="presentation">
 							<a role="menuitem" tabindex="-1"
-							href="/journal/1">Відвідування</a>
+							href="/journal/{{ student.id }}">Відвідування</a>
 							</li>
 							<li role="presentation">
-							<a role="menuitem" tabindex="-1" href="{% url "students_edit" 1 %}">Редагувати</a>
+							<a role="menuitem" tabindex="-1" href="{% url "students_edit" student.id %}">Редагувати</a>
 							</li>
 							<li role="presentation">
-							<a role="menuitem" tabindex="-1" href="{% url "students_delete" 1 %}">Видалити</a>
+							<a role="menuitem" tabindex="-1" href="{% url "students_delete" student.id %}">Видалити</a>
 							</li>
 							</ul>
 							</div>
 				  		</td>
 				  		<!-- End Viev -->
 				  	</tr>
+				  	{% endfor %} 
 
-				  	<tr>
-				  		<td>2</td>
-				  		<td><img height="40" weidth="40" src="./img/Musk.jpg" class="img-rounded"></td>
-				  		<td> <a title="Редагувати" href="/students/2/edit">Маск</a> </td>
-				  		<td> <a title="Редагувати" href="/students/2/edit">Елон</a></td>
-				  		<td>4523</td>
-				  		<!-- Viev -->
-				  		<td>
-				  			<div class="dropdown">
-				  			<button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Дія
-				  			<span class="caret"></span>
-							</button>
-							<ul class="dropdown-menu" role="menu">
-							<li role="presentation">
-							<a role="menuitem" tabindex="-1"
-							href="/journal/2">Відвідування</a>
-							</li>
-							<li role="presentation">
-							<a role="menuitem" tabindex="-1" href="/students/2/edit">Редагувати</a>
-							</li>
-							<li role="presentation">
-							<a role="menuitem" tabindex="-1" href="/students/2/delete">Видалити</a>
-							</li>
-							</ul>
-							</div>
-				  		</td>
-				  		<!-- End Viev -->
-				  	</tr>
-
-				  	<tr>
-				  		<td>3</td>
-				  		<td><img height="40" weidth="40" src="./img/Zuckerberg.jpg" class="img-rounded"></td>
-				  		<td> <a title="Редагувати" href="/students/3/edit">Цукерберг</a> </td>
-				  		<td> <a title="Редагувати" href="/students/3/edit">Марк</a></td>
-				  		<td>2648</td>
-				  		<!-- Viev -->
-				  		<td>
-				  			<div class="dropdown">
-				  			<button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Дія
-				  			<span class="caret"></span>
-							</button>
-							<ul class="dropdown-menu" role="menu">
-							<li role="presentation">
-							<a role="menuitem" tabindex="-1"
-							href="/journal/3">Відвідування</a>
-							</li>
-							<li role="presentation">
-							<a role="menuitem" tabindex="-1" href="/students/3/edit">Редагувати</a>
-							</li>
-							<li role="presentation">
-							<a role="menuitem" tabindex="-1" href="/students/3/delete">Видалити</a>
-							</li>
-							</ul>
-							</div>
-				  		</td>
-				  		<!-- End Viev -->
-				  	</tr>
-
-				  	<tr>
-				  		<td>4</td>
-				  		<td><img height="40" weidth="40" src="./img/Brez.jpg" class="img-rounded"></td>
-				  		<td> <a title="Редагувати" href="/students/4/edit">Брез</a> </td>
-				  		<td> <a title="Редагувати" href="/students/4/edit">Олександр</a></td>
-				  		<td>1254</td>
-				  		<!-- Viev -->
-				  		<td>
-				  			<div class="dropdown">
-				  			<button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Дія
-				  			<span class="caret"></span>
-							</button>
-							<ul class="dropdown-menu" role="menu">
-							<li role="presentation">
-							<a role="menuitem" tabindex="-1"
-							href="/journal/4">Відвідування</a>
-							</li>
-							<li role="presentation">
-							<a role="menuitem" tabindex="-1" href="/students/4/edit">Редагувати</a>
-							</li>
-							<li role="presentation">
-							<a role="menuitem" tabindex="-1" href="/students/4/delete">Видалити</a>
-							</li>
-							</ul>
-							</div>
-				  		</td>
-				  		<!-- End Viev -->
-				  	</tr>
 				  </tbody>
 				</table>
 				<!-- End Studentd Listind -->
