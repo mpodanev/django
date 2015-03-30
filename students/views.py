@@ -28,9 +28,8 @@ def students_list(request):
 	 'ticket': 1254,
 	 'image': 'img/jobs.jpg'})
     return render(request, 'students/students_list.html', {'students': students})
-
 def students_add(request):
-    return HttpResponse('<h1>Student Add Form</h1>')
+	return HttpResponse('<h1>Student Add Form</h1>')
 
 def students_edit(request, sid):
     return HttpResponse('<h1>Edit Student %s</h1>' % sid)
@@ -41,7 +40,20 @@ def students_delete(request, sid):
 # Views for Groups
 
 def groups_list(request):
-    return render(request, 'groups/groups_list.html', {})
+    groups = (
+		{'id': 1,
+	 'full_name': u'Поданев Михайло',
+	 'group': u'МтМ-21'},
+	 	{'id': 2,
+	 'full_name': u'Маск Елон',
+	 'group': u'МтМ-22'},
+	 	{'id': 3,
+	 'full_name': u'Цукерберг Марк',
+	 'group': u'МтМ-23'},
+	 	{'id': 4,
+	 'full_name': u'Джобс Стів',
+	 'group': u'МтМ-24'})
+    return render(request,'groups/groups_list.html', {'groups': groups})
 
 def groups_add(request):
     return HttpResponse('<h1>Group Add Form</h1>')
